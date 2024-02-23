@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List with User Information</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #FFC371, #FF5F6D);
+            background-image: url(first.png); /* Add your background image URL here */
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        .header {
+            height: 100px;
+            background-color: #E8FDF7;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="text"], input[type="email"], input[type="tel"], select, input[type="date"], input[type="submit"] {
+            padding: 10px;
+            margin-bottom: 10px;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            background-color: #fff;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        footer {
+            text-align: center;
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>To-Do List with User Information</h1>
+        <form id="todo-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="text" id="address" placeholder="Your Address" required>
+            <input type="email" id="email" placeholder="Your Email" required>
+            <input type="tel" id="phone" placeholder="Your Phone Number" required>
+            <input type="text" id="todo-input" placeholder="Enter task" required>
+            <select id="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            <input type="date" id="due-date" required>
+            <input type="submit" value="Add Task">
+        </form>
+        <ul id="todo-list"></ul>
+    </div>
+    <footer>
+        &copy; 2024 AKCreation. All Rights Reserved.
+    </footer>
+    <script>
+        document.getElementById("todo-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+            var name = document.getElementById("name").value;
+            var address = document.getElementById("address").value;
+            var email = document.getElementById("email").value;
+            var phone = document.getElementById("phone").value;
+            var task = document.getElementById("todo-input").value;
+            var priority = document.getElementById("priority").value;
+            var dueDate = document.getElementById("due-date").value;
+            var todoList = document.getElementById("todo-list");
+
+            if (task === "") {
+                alert("Please enter a task!");
+                return;
+            }
+
+            var li = document.createElement("li");
+            li.innerHTML = `
+                <strong>Name:</strong> ${name}<br>
+                <strong>Address:</strong> ${address}<br>
+                <strong>Email:</strong> ${email}<br>
+                <strong>Phone:</strong> ${phone}<br>
+                <strong>Task:</strong> ${task}<br>
+                <strong>Priority:</strong> ${priority}<br>
+                <strong>Due Date:</strong> ${dueDate}<br>
+                <button onclick="this.parentNode.remove()">Delete</button>
+            `;
+            todoList.appendChild(li);
+
+            // Clear input fields after submission
+            document.getElementById("name").value = "";
+            document.getElementById("address").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("phone").value = "";
+            document.getElementById("todo-input").value = "";
+            document.getElementById("priority").value = "low";
+            document.getElementById("due-date").value = "";
+        });
+    </script>
+</body>
+</html>
